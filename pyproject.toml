@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "wishlist"
+version = "0.1.0"
+description = ""
+authors = ["ivan <ivan4dante@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyrogram = "^2.0.106"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
