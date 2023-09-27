@@ -11,7 +11,7 @@ def gaben_store(game):
     availability = [" ".join(i.text.split()) for i in soup.findAll("a", class_="btn btn--primary js-addToCart")] + \
                    [i.text for i in soup.findAll("a", class_="btn btn--primary btn--empty-item js-addToCart added")]
     price = [i.text for i in soup.findAll("div", class_="shop-item__price-current")]
-    return [{"name": name[i], "price": price[i] + " " + availability[i], "link": links[i]} for i in range(len(name))]
+    return [{"name": name[i], "price": price[i], "link": links[i]} for i in range(len(name)) if availability[i] == 'В корзину']
 
 
 if __name__ == "__main__":
