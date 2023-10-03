@@ -1,13 +1,27 @@
+import os
+import uvloop
+
 from pyrogram import Client
+from modconfig import Config
 
 
 class Bot(Client):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, env=None, *args, **kwargs):
+        env = env or os.environ.get("ENV", "develop")
+        self.cfg = Config(f"app.config.{env}")
+        self.ENV = env
+        if os.path.exists("app/config/local.py") and not env == "tests":
+            self.cfg.update_from_modules("app.config.local")
+
+        super().__init__(
+            self.cfg.BOT_NAME,
+            bot_token=self.cfg.BOT_TOKEN,
+            api_id=self.cfg.BOT_API_ID,
+            api_hash=self.cfg.BOT_API_HASH,
+            plugins=dict(root="app/handlers")
+        )
 
 
-token = "5454227880:AAGf824-F5uiWL1kXEWiTlpuDYblIWFeZ5I"
-api_id = 28276544
-api_hash = "ad1ab2763f72c7c2f7bac547f2207d96"
+uvloop.install()
 
-bot = Bot("bot_name", bot_token=token, api_id=api_id, api_hash=api_hash, plugins=dict(root="app/handlers"))
+bot = Bot()
