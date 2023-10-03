@@ -1,9 +1,16 @@
 import asyncio
 
+import json
+from pathlib import Path
 import pytest
 from unittest import mock
 
 from pyrogram.types.user_and_chats.user import User
+
+
+class FakeRequestsResponse:
+    def __init__(self, text):
+        self.text = text
 
 
 @pytest.fixture(scope='session')
@@ -37,3 +44,23 @@ def send_message():
     with mock.patch("app.Bot.send_message") as mocked:
         mocked.return_value = response()
         yield mocked
+
+
+@pytest.fixture
+def response():
+    def resp():
+        return True
+
+    with mock.patch("requests.get") as mocked:
+        mocked.return_value = resp()
+        yield mocked
+
+
+@pytest.fixture()
+def fixture():
+    def load(name):
+        with Path(__file__).parent.joinpath(f"fixtures/{name}").open() as source:
+            # return json.load(source)
+            return FakeRequestsResponse(source.read())
+
+    return load
