@@ -1,4 +1,5 @@
 from .steampay import steampay
+from .gaben_store import gaben_store
 
 
 async def test_steampay(response, fixture):
@@ -29,3 +30,29 @@ async def test_steampay(response, fixture):
             'link': 'https://steampay.com/game/doodle-mafia'
         }
     ]
+
+
+async def test_gabestore(response, fixture):
+    response.return_value = fixture("gabe_store_response.html")
+
+    res = gaben_store("mafia")
+    assert res
+
+    assert res == [
+        {
+            'name': 'Mafia – Definitive Edition',
+            'price': '1999 ₽',
+            'link': 'https://gabestore.ru/game/mafia-definitive-edition'
+        },
+        {
+            'name': 'Mafia II – Definitive Edition',
+            'price': '1299 ₽',
+            'link': 'https://gabestore.ru/game/mafia-ii-definitive-edition'
+        },
+        {
+            'name': 'Mafia III – Definitive Edition',
+            'price': '1499 ₽',
+            'link': 'https://gabestore.ru/game/mafia-iii-definitive-edition'
+        }
+    ]
+

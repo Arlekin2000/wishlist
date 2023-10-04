@@ -10,6 +10,7 @@ def steambuy(game):
     time.sleep(1)
     driver.execute_script("window.scrollTo(0, 5500)")
     time.sleep(1)
+    driver.execute_script("window.scrollTo(0, 5500)")
     soup = BeautifulSoup(driver.page_source, "lxml")
     name = [i.text for i in soup.findAll("div", class_="product-item__title")]
     price = [i.text for i in soup.findAll("div", class_="product-item__cost")]
