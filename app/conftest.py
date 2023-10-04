@@ -13,9 +13,9 @@ class FakeRequestsResponse:
         self.text = text
 
 
-@pytest.fixture(scope='session')
-def loop():
-    return asyncio.get_event_loop()
+# @pytest.fixture(scope='session')
+# def loop():
+#     return asyncio.get_event_loop()
 
 
 @pytest.fixture(scope="session")
