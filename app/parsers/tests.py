@@ -3,7 +3,7 @@ from .gaben_store import gaben_store
 
 
 async def test_steampay(response, fixture):
-    response.return_value = fixture("steampay_response.html")
+    response.return_value = fixture("steampay_response")
 
     res = steampay("mafia")
     assert res
@@ -33,7 +33,7 @@ async def test_steampay(response, fixture):
 
 
 async def test_gabestore(response, fixture):
-    response.return_value = fixture("gabe_store_response.html")
+    response.return_value = fixture("gabe_store_response")
 
     res = gaben_store("mafia")
     assert res
