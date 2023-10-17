@@ -58,8 +58,9 @@ def response():
 
 @pytest.fixture()
 def fixture():
+    """Load html document and return it like response."""
     def load(name):
-        with Path(__file__).parent.joinpath(f"fixtures/{name}").open() as source:
+        with Path(__file__).parent.joinpath(f"fixtures/{name}.html").open() as source:
             # return json.load(source)
             return FakeRequestsResponse(source.read())
 
