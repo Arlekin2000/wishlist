@@ -49,6 +49,41 @@ async def test_get_game_name(bot, send_message, tg_user, response, fixture):
     assert button2.text == 'steampay 789 ₽'
     assert button2.url == 'https://steampay.com/game/mafia-ii-definitive-edition'
 
+    (user_id2, text2), params2 = send_message.call_args_list[2]
+    button2 = params2['reply_markup'].inline_keyboard[0][0]
+    assert user_id2 == tg_user.id
+    assert text2 == 'Название: Mafia III: Definitive Edition Экшены, Приключения\n'
+    assert button2.text == 'steampay 845 ₽'
+    assert button2.url == 'https://steampay.com/game/mafia-iii-definitive-edition'
+
+    (user_id2, text2), params2 = send_message.call_args_list[3]
+    button2 = params2['reply_markup'].inline_keyboard[0][0]
+    assert user_id2 == tg_user.id
+    assert text2 == 'Название: Doodle Mafia Симуляторы, Казуальные\n'
+    assert button2.text == 'steampay 95 ₽'
+    assert button2.url == 'https://steampay.com/game/doodle-mafia'
+
+    (user_id2, text2), params2 = send_message.call_args_list[4]
+    button2 = params2['reply_markup'].inline_keyboard[0][0]
+    assert user_id2 == tg_user.id
+    assert text2 == 'Название: Mafia – Definitive Edition\n'
+    assert button2.text == 'gabestore 1999 ₽'
+    assert button2.url == 'https://gabestore.ru/game/mafia-definitive-edition'
+
+    (user_id2, text2), params2 = send_message.call_args_list[5]
+    button2 = params2['reply_markup'].inline_keyboard[0][0]
+    assert user_id2 == tg_user.id
+    assert text2 == 'Название: Mafia II – Definitive Edition\n'
+    assert button2.text == 'gabestore 1299 ₽'
+    assert button2.url == 'https://gabestore.ru/game/mafia-ii-definitive-edition'
+
+    (user_id2, text2), params2 = send_message.call_args_list[6]
+    button2 = params2['reply_markup'].inline_keyboard[0][0]
+    assert user_id2 == tg_user.id
+    assert text2 == 'Название: Mafia III – Definitive Edition\n'
+    assert button2.text == 'gabestore 1499 ₽'
+    assert button2.url == 'https://gabestore.ru/game/mafia-iii-definitive-edition'
+
     # TODO: продолжить тест
     # запустить все тесты можно командой "pytest"
     # запустить один тест можно командой "pytest app/handlers/test.py::test_get_game_name"
